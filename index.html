@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #header {
+            background-color: #0077B5; /* LinkedIn Blue */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        #heart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        #heart {
+            width: 150px;
+            height: 150px;
+            position: relative;
+        }
+        #heart::before, #heart::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 75px;
+            height: 120px;
+            background-color: #E60023; /* Heart Red */
+            border-radius: 50px 50px 0 0;
+        }
+        #heart::before {
+            left: 75px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        #heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .cta-button {
+            background-color: #004C97; /* LinkedIn Dark Blue */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #0058B8; /* LinkedIn Light Blue */
+        }
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+            40% {
+                transform: scale(1.3);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            60% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>My name is HOPE UMANAH</h1>
+        <p>I am a Web Developer | Tech Enthusiast</p>
+        <div id="heart-container">
+            <div id="heart"></div>
+        </div>
+        <p>CLICK THE BUTTON BELOW TO CONNECT WITH ME ON LinkedIn</p>
+        <button id="connect-button" class="cta-button">Connect with Me</button>
+    </div>
+
+    <script>
+        // You can adjust the interval time (in milliseconds)
+        const intervalTime = 2000;
+        let linkedinLink = "https://www.linkedin.com/in/hope-umanah-3b95a2221"; // Default LinkedIn profile link
+
+        // Function to toggle heartbeat animation
+        function toggleHeartbeat() {
+            const heart = document.getElementById('heart');
+            heart.style.animation = 'none';
+            setTimeout(() => {
+                heart.style.animation = 'heartbeat 1s infinite alternate';
+            }, 10);
+        }
+
+        // Function to open LinkedIn profile link in a new tab
+        function openLinkedinProfile() {
+            window.open(linkedinLink, '_blank');
+        }
+
+        // Start the heartbeat at intervals
+        setInterval(toggleHeartbeat, intervalTime);
+
+        // Update LinkedIn link if provided in the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkedinParam = urlParams.get('linkedin');
+        if (linkedinParam) {
+            linkedinLink = linkedinParam;
+        }
+
+        // Add event listener to the connect button
+        document.getElementById('connect-button').addEventListener('click', openLinkedinProfile);
+    </script>
+</body>
+</html>
+
